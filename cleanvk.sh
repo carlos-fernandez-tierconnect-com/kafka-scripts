@@ -6,7 +6,7 @@
 #================================================================
 
 KAFKA_HOME=/opt/kafka
-VIZIX_SERVICES_HOME=/home/cfernandez/src/mojix/riot
+VIZIX_HOME=/home/cfernandez/src/mojix/riot
 
 echo $KAFKA_HOME
 
@@ -57,9 +57,9 @@ read -p "Do you want to populate kafka ? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    cd $VIZIX_SERVICES_HOME/riot-core-services
+    cd $VIZIX_HOME/riot-core-services
     pwd
-    export VIZIX_HOME_SERVICES=$VIZIX_SERVICES_HOME/riot-core-services/build
+    export VIZIX_HOME_SERVICES=$VIZIX_HOME/riot-core-services/build
     echo "VIZIX_HOME_SERVICES: ${VIZIX_HOME_SERVICES}"
     ./kafkaTopicTool.sh -c
     ./kafkaCacheLoader.sh
