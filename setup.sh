@@ -7,11 +7,12 @@
 
 VIZIX_HOME=/home/cfernandez/src/mojix/riot
 DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
+USER_PASSWORD=password
 
 echo "Starting vizix deploy..."
 echo $VIZIX_HOME
 
-VERSION=${1:-v6.72.11}
+VERSION=${1:-v7.4.0}
 
 echo $VERSION
 
@@ -22,7 +23,7 @@ docker-compose down
 # Preparing sysconfig
 echo "Removing volumes..."
 cd $DOCKER_COMPOSE_HOME/volume || { echo "Cannot find volume directory"; exit 1; }
-echo "password" | sudo -S rm -rf kafka zookeper mysql vizix
+echo $USER_PASSWORD | sudo -S rm -rf kafka zookeper mysql vizix
 cd $DOCKER_COMPOSE_HOME || { echo "Cannot find DOCKER_COMPOSE_HOME directory"; exit 1; }
 docker-compose up -d kafka
 docker-compose up -d mysql
@@ -30,7 +31,7 @@ docker-compose up -d mongo
 
 # Start vizix-tools executiion
 cd $DOCKER_COMPOSE_HOME/volume/tools/sysconfig || { echo "Cannot find volume/tools/sysconfig directory"; exit 1; }
-echo "password" | sudo -S rm -rf *
+echo $USER_PASSWORD| sudo -S rm -rf *
 ls -l
 
 echo "Getting sysconfig files version: "$VERSION
@@ -40,11 +41,18 @@ git branch -D temp_$VERSION
 git fetch --all --tags
 git checkout tags/$VERSION -b temp_$VERSION
 ls -l
-echo "password" | sudo -S cp -R * $DOCKER_COMPOSE_HOME/volume/tools/sysconfig
+echo $USER_PASSWORD | sudo -S cp -R * $DOCKER_COMPOSE_HOME/volume/tools/sysconfig
 
 cd $DOCKER_COMPOSE_HOME || { echo "Cannot find DOCKER_COMPOSE_HOME directory"; exit 1; }
 VIZIX_TOOLS_IMAGE="mojix/vizix-tools:"$VERSION docker-compose pull tools
 VIZIX_TOOLS_IMAGE="mojix/vizix-tools:"$VERSION docker-compose up tools
+
+read -p "does sysconfig run successfully ? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "continue installation...."
+fi
 # End vizix-tools executiion
 
 VIZIX_SERVICES_IMAGE="mojix/riot-core-services:"$VERSION docker-compose pull services
