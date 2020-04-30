@@ -12,7 +12,7 @@ USER_PASSWORD=password
 echo "Starting vizix deploy..."
 echo $VIZIX_HOME
 
-VERSION=${1:-v7.4.0}
+VERSION=${1:-v7.5.0}
 
 echo $VERSION
 
@@ -58,8 +58,8 @@ fi
 VIZIX_SERVICES_IMAGE="mojix/riot-core-services:"$VERSION docker-compose pull services
 VIZIX_SERVICES_IMAGE="mojix/riot-core-services:"$VERSION docker-compose up -d services
 
-VIZIX_REPORTS="mojix/riot-core-reports:"$VERSION docker-compose pull reports
-VIZIX_REPORTS="mojix/riot-core-reports:"$VERSION docker-compose up -d reports
+VIZIX_REPORTS="mojix/vizix-reports:"$VERSION docker-compose pull reports
+VIZIX_REPORTS="mojix/vizix-reports:"$VERSION docker-compose up -d reports
 
 VIZIX_BRIDGES_IMAGE="mojix/riot-core-bridges:"$VERSION docker-compose pull rg
 VIZIX_BRIDGES_IMAGE="mojix/riot-core-bridges:"$VERSION docker-compose up -d rg

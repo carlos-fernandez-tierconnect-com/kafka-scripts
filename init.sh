@@ -1,6 +1,6 @@
 #! /bin/bash
 
-VERSION=${1:-v7.4.0}
+VERSION=${1:-v6.72.11}
 DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
 
 echo "Starting envrinment | version: $VERSION"

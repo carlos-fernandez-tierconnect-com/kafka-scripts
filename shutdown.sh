@@ -1,6 +1,6 @@
 #! /bin/bash
 
-VERSION=${1:-v7.4.0}
+VERSION=${1:-v7.5.0}
 DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
 
 echo "Shutdwon envrinment | version: $VERSION"
@@ -26,6 +26,8 @@ docker-compose stop kafka
 docker-compose stop zoo
 docker-compose stop mysql
 docker-compose stop mongo
+
+docker-compose down
 
 echo
 docker-compose ps
