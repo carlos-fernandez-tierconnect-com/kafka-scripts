@@ -1,7 +1,7 @@
 #! /bin/bash
 
-VERSION=${1:-v7.5.0}
-DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
+VERSION=${1:-v7.8.0}
+DOCKER_COMPOSE_HOME=/home/cfernandez/docker/vizix
 
 echo "Shutdwon envrinment | version: $VERSION"
 

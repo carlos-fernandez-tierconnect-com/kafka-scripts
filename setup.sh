@@ -5,14 +5,14 @@
 #% Install an specific version of ViZix
 #================================================================
 
-VIZIX_HOME=/home/cfernandez/src/mojix/riot
-DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
+VIZIX_HOME=/home/cfernandez/src/mojix/vizix
+DOCKER_COMPOSE_HOME=/home/cfernandez/docker/vizix
 USER_PASSWORD=password
 
 echo "Starting vizix deploy..."
 echo $VIZIX_HOME
 
-VERSION=${1:-v7.5.0}
+VERSION=${1:-v7.8.0}
 
 echo $VERSION
 

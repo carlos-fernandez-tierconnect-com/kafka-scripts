@@ -1,7 +1,7 @@
 #! /bin/bash
 
-VERSION=${1:-v6.72.11}
-DOCKER_COMPOSE_HOME=/home/cfernandez/Documents/docker/kafka2
+VERSION=${1:-v7.8.0}
+DOCKER_COMPOSE_HOME=/home/cfernandez/docker/vizix
 
 echo "Starting envrinment | version: $VERSION"
 
@@ -14,7 +14,7 @@ docker-compose up -d mongo
 
 VIZIX_SERVICES_IMAGE="mojix/riot-core-services:"$VERSION docker-compose up -d services
 
-VIZIX_REPORTS="mojix/riot-core-reports:"$VERSION docker-compose up -d reports
+VIZIX_REPORTS="mojix/vizix-reports:"$VERSION docker-compose up -d reports
 
 VIZIX_BRIDGES_IMAGE="mojix/riot-core-bridges:"$VERSION docker-compose up -d rg
 VIZIX_BRIDGES_IMAGE="mojix/riot-core-bridges:"$VERSION docker-compose up -d moits
